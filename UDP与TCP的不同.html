@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>UDP与TCP的不同</title>
+</head>
+<body>
+  <h2>UDP与TCP的不同</h2>
+  <ol>
+    <li>TCP是基于连接的，而UDP不是基于连接的</li>
+    <li>。
+      TCP的优点就是可靠和稳定，每次连接之前都要三次握手什么的。
+      但是它的缺点也很明显，就是慢、效率低
+    </li>
+    <li>
+      UDP的优点快，他没有握手这些环节，而且UDP是一个无状态的传输协议。
+      但是缺点就是不稳定，不可靠，在数据传输的时候，如果网络质量不好，很容易丢包。
+    </li>
+    <li>
+      TCP的网络开销要大一点。
+      UDP的首部是8个字节，不存在可选字段。但是TCP除了固定的20字节长度，还包括可选项。
+    </li>
+    <li>
+      TCP是流模式的，而UDP是数据报模式。
+    </li>
+  </ol>
+  <h2>使用场景</h2>
+  <ul>
+    <li>
+      如果整个数据需要稳定无误的传达给对方，那么使用TCP。比如HTTP、HTTPS、FTP
+    </li>
+    <li>
+      如果对通讯质量要求不高、单希望传输速度尽量快一点的时候就可以使用UDP了，比如QQ语言、QQ视频以及DNS查询
+    </li>
+  </ul>
+  <h2>QQ为什么以UDP为主，TCP为辅</h2>
+  <p>
+    其实在网络状态差的时候，TCP的可靠稳定的有点反而会成为它的缺点。<br>
+    如果再网络条件比较差的情况下，TCP由于 拥塞控制和保证有序 等原因，
+    其实对带宽的利用是不大的。而且很有可能会进行无脑地重传，例如QQ视频，
+    这时候UDP就有优势了，就是快啊。其次如果有数据丢失，UDP是不会进行重传的，
+    但是TCP会。一般用户可以接受一卡一卡的。
+  </p>
+</body>
+</html>

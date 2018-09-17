@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h2>关于缓存的响应头和请求头</h2>
+
+  <ol>
+    <li>
+      浏览器第一次请求的时候会带上Last-Modified。
+      再次请求的时候回带上If-Modified-Since。
+      如果资源没有变化，那么就自动返回304，响应体为空。
+    </li>
+    <li>
+      Etag（服务器端）与If-None-Match（客户端）
+    </li>
+  </ol>
+  <hr>
+  <ul>
+    <li>
+      上面的两个都还逃不过发送一个HTTP请求，去服务端查看是不是没有更新
+    </li>
+    <li>
+      可以通过设置expires来设置缓存的载止时间，
+      允许客户端在这个时间之前不去检查
+    </li>
+    <li>
+      但是expires有一个缺点就是，返回的到期时间是相对服务端的时间。
+      存在这样一个问题，如果客户端的事件和服务端时间相差很大，会不正确。
+      所以HTTP1.1的Cache-Control新增的max-age可以解决。
+    </li>
+    <li>
+      cache-control：max-age的优先级比expires要高。
+    </li>
+  </ul>
+  <hr>
+  <h2>Etag和Last-Modified</h2>
+  <p>
+    主要是：如果某个文件修改非常频繁，比如1s中修改了很多次，
+    但是Last-Modified对这种情况是没办法判断的。
+  </p>
+</body>
+</html>

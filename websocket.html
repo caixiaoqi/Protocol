@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WebSocket</title>
+</head>
+<body>
+  <h2>WebSocket是H5的一种新的协议，它主要是为了建立在服务器和浏览器之间的全双工的通信。</h2>
+  <ul>
+    <li>
+      虽然TCP三次握手建立起来的通信是全双工的，但是HTTP协议中请求只能是客户端发起，服务端响应。
+      其实这种通信对话是不对等的。
+    </li>
+    <li>
+      如果需要实时通信的话，可能就会采取轮询的方法。但是轮询一般情况下，
+      会很浪费资源。因为如果是短连接，每次连接过程中都要三次握手，在高延迟的情况下比较麻烦。即使你是
+      长连接，其实所谓的长连接就是共用一个TCP的通道啊，你每次可能就是发送一个很短的数据，
+      但是依然要带上很长的Header，不是很划算，浪费带宽。况且，轮询的时候可能大部分情况下是没有想要的响应的。
+    </li>
+  </ul>
+  <h3>原理,WebSocket其实也是一个应用层的协议</h3>
+  <ul>
+    <li>
+      它也会有握手环节。浏览器和服务器通过三次握手建立连接
+    </li>
+    <li>
+      TCP连接成功之后，其实浏览器还会通过HTTP协议向服务器发送自己所支持的websocket的版本号等信息。（HTTI 101状态码 Switching Protocol状态码---服务器会响应这个状态码）
+    </li>
+    <li>
+      服务端接收到HTTP的报文之后，同样采取HTTP协议回馈数据
+    </li>
+    <li>
+      当双方达成一致的时候，就开始通过TCP通道进行传输通信。
+    </li>
+  </ul>
+  <h3>优点</h3>
+  <ul>
+    <li>
+      较少的控制开销。在连接创建后，服务端和客户端之间交换数据的时候，用于协议控制的数据包头部相对较少。
+      在不包含扩展的情况下，服务器到客户端的时候一包只包括2-10个头部字节。
+      客户端到服务端的内容，头部还需要加上额外的4字节的掩码。
+      而每次HTTP请求都会带上全部的头部。
+    </li>
+    <li>
+      更强的实时性。
+    </li>
+    <li>
+      其实websocket是一种有状态的协议。与HTT不同，websocket在创建连接之后，就会成为一种有状态的协议，
+      之后通信就可以不再携带状态信息
+    </li>
+  </ul>
+  <pre>
+      var ws=new WebSocket('ws:');
+      ws.onopen=function(){
+
+      } 
+      we.onerror=function(){
+
+      }
+      ws.onmessage=function(e){
+        e.data
+      }
+      ws.onclose=function(){
+
+      } 
+      ws.send(); 
+  </pre>
+
+  <textarea name="" id="textarea" cols="30" rows="10"></textarea>
+  <button id="button">Send Message</button>
+  <textarea name="" id="textarea2" cols="30" rows="10"></textarea>
+  <script>
+      var ws=new WebSocket('ws://121.40.165.18:8800');
+      ws.onopen=function(){
+        console.log('open')
+      } 
+      ws.onerror=function(){
+        console.log('close')
+      }
+      ws.onmessage=function(e){
+        console.log(e.data);
+      }
+      ws.onclose=function(){
+        console.log('close')
+      } 
+      // ws.send();
+
+      document.getElementById("button").onclick=function(){
+        var textarea=document.getElementById('textarea');
+        var value=textarea.value;
+        ws.send(value);
+      }
+  </script>
+</body>
+</html>

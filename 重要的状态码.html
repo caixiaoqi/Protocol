@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>重要的状态码</title>
+</head>
+<body>
+  <h2>重要的状态码</h2>
+  <ul>
+    <li>100 continue</li>
+    <li>101 switching protocol 切换协议</li>
+    <li>200 OK</li>
+    <li>201 Created 表示新增的资源已创建</li>
+    <li>202 Accept 表示请求已经收到，但是还没有处理</li>
+    <li>301 永久重定向，Location</li>
+    <li>302 Found 临时重定向，请求的资源被暂时移动到了Location指定的地方。
+        浏览器会重定向这个URL，但是搜索引擎不会对该资源进行更新。
+        一般都是GET请求的临时重定向
+    </li>
+    <li>
+      303 See Other，也是临时重定向，但是另一个页面，
+      一般比如PUT和POST操作之后，可能会有一个上传进度或者确认消息的页面
+    </li>
+    <li>
+      304 Not Modified，就是让你使用缓存的内容
+    </li>
+    <li>
+      400 Bad Reauest,表示语法无效，服务器不理解
+    </li>
+    <li>
+      401 Unautorized，表示缺乏身份验证，但是你还是可以进行下一步的身份验证
+    </li>
+    <li>
+      403 Foridden，拒绝你的访问，有可能是你的身份验证不通过。以后也不会在进行下一步的身份验证
+    </li>
+    <li>
+      404 Not Found
+    </li>
+    <li>
+      5开头的一般都是服务器端的错误。
+    </li>
+  </ul>
+</body>
+</html>
